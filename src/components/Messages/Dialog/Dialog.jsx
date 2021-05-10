@@ -3,26 +3,27 @@ import React from "react";
 import Send_a_message_Container from "./Send_a_massege/Send_a_messageContainer";
 import DialogAllMessegeList from "./DialogAllMessageList/DialogAllMessegeList";
 
-function Dialog(props) {
-    let path1 = "/messages/" + props.messagesDate[0].id;
-    let path2 = "/messages/" + props.messagesDate[1].id;
+class Dialog extends React.Component {
+     path1 = "/messages/" + this.props.messagesDate[0].id;
+     path2 = "/messages/" + this.props.messagesDate[1].id;
 
-    let DAMList = props.messagesDate.map(messages => <DialogAllMessegeList message={messages.message}/>);
+     DAMList = this.props.messagesDate.map(messages => <DialogAllMessegeList message={messages.message}/>);
 
-    return (
-        <div>
-            <Switch>
-                <Route path={path1}>
-                    <div>{DAMList}</div>
-                    <Send_a_message_Container/>
-                </Route>
-                <Route path={path2}>
-                    <div>{DAMList}</div>
-                    <Send_a_message_Container/>
-                </Route>
-            </Switch>
-        </div>
-
-    )
+    render() {
+        return (
+            <div>
+                <Switch>
+                    <Route path={this.path1}>
+                        <div>{this.DAMList}</div>
+                        <Send_a_message_Container/>
+                    </Route>
+                    <Route path={this.path2}>
+                        <div>{this.DAMList}</div>
+                        <Send_a_message_Container/>
+                    </Route>
+                </Switch>
+            </div>
+        )
+    }
 }
 export default Dialog;

@@ -13,23 +13,23 @@ import Settings from "./components/Settings/Settings";
 import {BrowserRouter, Route} from "react-router-dom";
 
 
-
-
-function App(props) {
-    return (
-        <BrowserRouter>
-            <div class="row">
-                <Header/>
-                <Nav/>
-                <Route path='/profile' render={() => <Profile/>}/>
-                <Route path='/messages' render={() => <MessagesContainer/>}/>
-                <Route path='/news' component={News}/>
-                <Route path='/music' component={Music}/>
-                <Route path='/users' component={UsersContainer}/>
-                <Route path='/settings' component={Settings}/>
-            </div>
-        </BrowserRouter>
-    );
+class App extends React.Component {
+    render() {
+        return (
+            <BrowserRouter>
+                <div class="row">
+                    <Header/>
+                    <Nav/>
+                    <Route path='/profile' render={() => <Profile/>}/>
+                    <Route path='/messages' render={() => <MessagesContainer/>}/>
+                    <Route path='/news' component={News}/>
+                    <Route path='/music' component={Music}/>
+                    <Route path='/users' component={UsersContainer}/>
+                    <Route path='/settings' component={Settings}/>
+                </div>
+            </BrowserRouter>
+        );
+    }
 }
 
 export default App;

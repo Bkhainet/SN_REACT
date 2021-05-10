@@ -1,7 +1,5 @@
 import React from "react";
 import {Route, Link} from "react-router-dom";
-import M from 'materialize-css'
-
 function Nav() {
     return (
         <Route>

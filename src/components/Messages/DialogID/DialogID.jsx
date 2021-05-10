@@ -1,17 +1,21 @@
 import {NavLink} from "react-router-dom";
 import React from "react";
 
-function DialogID(props) {
-    let path = "/messages/" + props.id;
-    return (
-        <div className="collection">
-            <a className="collection-item">
-                <NavLink to={path}>
-                    {props.name}
-                </NavLink>
-            </a>
+class DialogID extends React.Component {
+    path = "/messages/" + this.props.id;
+    render() {
+        return (
+            <div className="collection">
+                <a className="collection-item">
+                    <NavLink to={this.path}>
+                        {this.props.name}
+                    </NavLink>
+                </a>
+            </div>
+        );
+    }
 
-        </div>
-    );
+
+
 }
 export default DialogID;

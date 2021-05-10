@@ -1,32 +1,33 @@
 import React from "react";
 
-function NewPost(props) {
-
-    let newPostElement = React.createRef();
-    let addPost = () => {
-        props.addPost();
+class NewPost extends React.Component {
+    newPostElement = React.createRef();
+    addPost = () => {
+        this.props.addPost();
     }
 
-    let updateNewPostText = () => {
-        let text = newPostElement.current.value;
-        props.updateNewPostText(text);
+    updateNewPostText = () => {
+        let text = this.newPostElement.current.value;
+        this.props.updateNewPostText(text);
     }
 
-    return (
-        <div className="row">
-            <div className="col s6">
-                <div className="input-field">
+    render() {
+        return (
+            <div className="row">
+                <div className="col s6">
+                    <div className="input-field">
                             <textarea className="materialize-textarea"
-                                      onChange={updateNewPostText} ref={newPostElement} value={props.NewPostText}/>
+                                      onChange={this.updateNewPostText} ref={this.newPostElement} value={this.props.NewPostText}/>
+                    </div>
+                </div>
+                <div className="col s6 ">
+                    <div className="center-align" style={{marginTop: 23 + 'px'}}>
+                        <button className="btn waves-effect waves-light" type="submit" onClick={this.addPost}>Add post</button>
+                    </div>
                 </div>
             </div>
-            <div className="col s6 ">
-                <div className="center-align" style={{marginTop: 23 + 'px'}}>
-                    <button className="btn waves-effect waves-light" type="submit" onClick={addPost}>Add post</button>
-                </div>
-            </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default NewPost;

@@ -1,12 +1,16 @@
 import React from "react";
 
-function DialogAllMessegeList(props) {
-    return (
-        <div>
-            <br/>
-            -------------------------------
-            <div>{props.message}</div>
-        </div>
-    )
+class DialogAllMessegeList extends React.Component {
+    render() {
+        return (
+            <div>
+                <br/>
+                -------------------------------
+                <div>{this.props.message}</div>
+            </div>
+        )
+    }
+
+
 }
 export default DialogAllMessegeList;

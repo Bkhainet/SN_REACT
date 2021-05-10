@@ -9,8 +9,6 @@ let mapStateToProps = (state) => {
     }
 }
 const MyPostContainer = connect(mapStateToProps)(MyPost);
-
-
 export default MyPostContainer;
 
 
