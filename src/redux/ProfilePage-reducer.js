@@ -13,28 +13,6 @@ let initialState = {
 
 
 const ProfilePage_Reducer = (state = initialState, action) => {
-    // switch (action.type) {
-    //     case ADD_POST: {
-    //         let newPost = {
-    //             id: 0,
-    //             post: state.NewPostText,
-    //             like: 0
-    //         };
-    //         let stateCOPY = {...state};
-    //         stateCOPY.PostsDate = [...state.PostsDate];
-    //         stateCOPY.PostsDate.push(newPost);
-    //         stateCOPY.NewPostText = '';
-    //         return stateCOPY;
-    //     }
-    //     case UPDATE_NEW_POST_TEXT: {
-    //         let stateCOPY = {...state};
-    //         stateCOPY.PostsDate = [...state.PostsDate];
-    //         stateCOPY.NewPostText = action.NewText;
-    //         return stateCOPY;
-    //     }
-    //     default:
-    //         return state;
-    // }
     switch (action.type) {
         case ADD_POST: {
             let bodyPost = state.NewPostText;

@@ -4,9 +4,7 @@ import NewPostContainer from "./NewPost/NewPostContainer";
 import MyPostContainer from "./MyPost/MyPostConteiner";
 
 
-
 class Profile extends React.Component {
-
     render() {
         return (
             <div className="col s9">
@@ -14,7 +12,8 @@ class Profile extends React.Component {
                     <div className="col s12 m7">
                         <div className="card grey lighten-1 ">
                             <div className="card-image">
-                                <img src="https://cdn.ihsmarkit.com/www/blog/ra-global-business-527035084-post.jpg" alt=""/>
+                                <img src="https://cdn.ihsmarkit.com/www/blog/ra-global-business-527035084-post.jpg"
+                                     alt=""/>
                             </div>
                             <div className="card-content">
                                 <div className="card horizontal light-blue darken-3">
