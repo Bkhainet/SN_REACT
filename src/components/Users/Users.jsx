@@ -1,17 +1,46 @@
 import React from "react";
 import * as axios from "axios";
+import {createPages} from "./createPages";
 
 class Users extends React.Component {
 
+    constructor(props) {
+        super(props);
+    }
+
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
             this.props.setusers(response.data.items);
+            this.props.setTotalCaunt(response.data.totalCount);
         })
     }
 
+    onChaingePag = (pageNumber) => {
+        this.props.setcurrentpage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+            this.props.setusers(response.data.items);
+        })
+
+    }
+
+
     render() {
+        let pagesCount = Math.ceil(this.props.totalCount / this.props.pageSize);
+        let pages = [];
+        
+        createPages(pages, pagesCount, this.props.currentPage);
+
         return (
             <div className="col s6">
+
+                <ul className="pagination">
+                    {pages.map(p => {
+                        return <li className={this.props.currentPage === p && "active" || "waves-effect"}>
+                            <a onClick={(e) => { this.onChaingePag(p) }}>{p}</a>
+                        </li>
+                    })}
+                </ul>
+
                 {this.props.users.map
                 (u => <div key={u.id}>
                     <div className="card horizontal">
@@ -42,13 +71,11 @@ class Users extends React.Component {
                             </div>
                         </div>
                     </div>
-
-
                 </div>)}
+
             </div>
         )
     }
 }
-
 export default Users;
 
