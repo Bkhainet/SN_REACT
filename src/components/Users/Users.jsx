@@ -1,81 +1,60 @@
 import React from "react";
-import * as axios from "axios";
-import {createPages} from "./createPages";
 
-class Users extends React.Component {
+function Users(props) {
 
-    constructor(props) {
-        super(props);
-    }
+    let pagesCount = Math.ceil(props.totalCount / props.pageSize);
+    let pages = [];
 
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
-            this.props.setusers(response.data.items);
-            this.props.setTotalCaunt(response.data.totalCount);
-        })
-    }
+    props.createPages(pages, pagesCount, props.currentPage);
 
-    onChaingePag = (pageNumber) => {
-        this.props.setcurrentpage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
-            this.props.setusers(response.data.items);
-        })
+    return (
+        <div className="col s6">
 
-    }
+            <ul className="pagination">
+                {pages.map(p => {
+                    return <li className={props.currentPage === p && "active" || "waves-effect"}>
+                        <a onClick={(e) => {
+                            props.onChaingePag(p)
+                        }}>{p}</a>
+                    </li>
+                })}
+            </ul>
 
-
-    render() {
-        let pagesCount = Math.ceil(this.props.totalCount / this.props.pageSize);
-        let pages = [];
-        
-        createPages(pages, pagesCount, this.props.currentPage);
-
-        return (
-            <div className="col s6">
-
-                <ul className="pagination">
-                    {pages.map(p => {
-                        return <li className={this.props.currentPage === p && "active" || "waves-effect"}>
-                            <a onClick={(e) => { this.onChaingePag(p) }}>{p}</a>
-                        </li>
-                    })}
-                </ul>
-
-                {this.props.users.map
-                (u => <div key={u.id}>
-                    <div className="card horizontal">
-                        <div className="card-image">
-                            <img
-                                // src={u.fotoProfile}
-                                src={u.fotoProfile != null ? u.fotoProfile : "https://it-workings.ru/wp-content/uploads/2019/08/blank-avatar.jpg"}
-                                width={150} height={150}/>
+            {props.users.map
+            (u => <div key={u.id}>
+                <div className="card horizontal">
+                    <div className="card-image">
+                        <img
+                            // src={u.fotoProfile}
+                            src={u.fotoProfile != null ? u.fotoProfile : "https://it-workings.ru/wp-content/uploads/2019/08/blank-avatar.jpg"}
+                            width={150} height={150}/>
+                    </div>
+                    <div className="card-stacked">
+                        <div className="card-content #2196f3 blue">
+                            <div className="col s3">
+                                <p>{u.name}</p>
+                                <p>{u.status}</p>
+                            </div>
+                            <div className="col s3">
+                                <p>ID:{u.id}</p>
+                                <p>uniqueUrlName:{u.uniqueUrlName}</p>
+                            </div>
                         </div>
-                        <div className="card-stacked">
-                            <div className="card-content #2196f3 blue">
-                                <div className="col s3">
-                                    <p>{u.name}</p>
-                                    <p>{u.status}</p>
-                                </div>
-                                <div className="col s3">
-                                    <p>ID:{u.id}</p>
-                                    <p>uniqueUrlName:{u.uniqueUrlName}</p>
-                                </div>
-                            </div>
-                            <div className="card-action">
-                                {u.followed ? <button class="btn waves-effect waves-light red" onClick={() => {
-                                        this.props.unfollow(u.id)
-                                    }}>Unfollow<i className="material-icons right">clear</i></button> :
-                                    <button class="btn waves-effect waves-light " onClick={() => {
-                                        this.props.follow(u.id)
-                                    }}>Follow<i className="material-icons right">check</i></button>}
-                            </div>
+                        <div className="card-action">
+                            {u.followed ? <button class="btn waves-effect waves-light red" onClick={() => {
+                                    props.unfollow(u.id)
+                                }}>Unfollow<i className="material-icons right">clear</i></button> :
+                                <button class="btn waves-effect waves-light " onClick={() => {
+                                    props.follow(u.id)
+                                }}>Follow<i className="material-icons right">check</i></button>}
                         </div>
                     </div>
-                </div>)}
+                </div>
+            </div>)}
 
-            </div>
-        )
-    }
+        </div>
+    )
 }
+
 export default Users;
 
